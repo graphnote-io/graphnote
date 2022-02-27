@@ -14,6 +14,7 @@ struct InputField: View {
     var body: some View {
         ZStack(alignment: .leading) {
             TextEditor(text: text)
+                .textFieldStyle(.plain)
                 .onChange(of: text.wrappedValue) { _ in
                     if !text.wrappedValue.filter({ $0.isNewline }).isEmpty {
                         print("Found new line character")
@@ -22,6 +23,7 @@ struct InputField: View {
                 .font(.body)
                 .lineSpacing(lineSpacing)
                 .foregroundColor(.primary)
+                .cornerRadius(4)
                 .fixedSize(horizontal: false, vertical: true)
                 
             if text.wrappedValue == "" {

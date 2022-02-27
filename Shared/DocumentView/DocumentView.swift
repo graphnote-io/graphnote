@@ -74,14 +74,6 @@ struct DocumentView: View {
                         InputField(lineSpacing: textSpacing, text: $blockText)
                             .padding(pad)
                     }.frame(width: maxBlockWidth)
-                    HStack {
-                        Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
-                            .font(.body)
-                            .lineSpacing(textSpacing)
-                            .padding(pad)
-                            .foregroundColor(.primary)
-                        Spacer()
-                    }.frame(width: maxBlockWidth)
                     Spacer()
                 }
                 .frame(minWidth: size.width - scrollWidth, minHeight: size.height * pageMinHeightMultiplier)
@@ -106,15 +98,10 @@ struct DocumentView: View {
                         
                     }
                     HStack {
-                        Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
-                            .font(.body)
-                            .lineSpacing(textSpacing)
-                            .padding(open.wrappedValue ? pad / 2 : pad)
-                            .foregroundColor(.primary)
-                        Spacer()
+                        InputField(lineSpacing: textSpacing, text: $blockText)
+                            .padding(pad)
                     }
-                    
-                    Spacer(minLength: pad * 2)
+                    Spacer()
                 }
                 .frame(minWidth: size.width, minHeight: size.height * pageMinHeightMultiplier)
                 .background(colorScheme == .dark ? darkBackgroundColor : lightBackgroundColor)
