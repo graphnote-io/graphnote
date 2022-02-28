@@ -63,16 +63,11 @@ struct TreeViewItem: View, Identifiable {
                         ArrowView(color: color)
                             .frame(width: TreeViewItemDimensions.arrowWidthHeight.rawValue, height: TreeViewItemDimensions.arrowWidthHeight.rawValue)
                             .rotationEffect(Angle(degrees: 90))
-                            .onTapGesture {
-                                toggle.toggle()
-                            }
-                    
+
                     } else {
                         ArrowView(color: color)
                             .frame(width: TreeViewItemDimensions.arrowWidthHeight.rawValue, height: TreeViewItemDimensions.arrowWidthHeight.rawValue)
-                            .onTapGesture {
-                                toggle.toggle()
-                            }
+  
                     }
                     
                     
@@ -104,6 +99,9 @@ struct TreeViewItem: View, Identifiable {
                             .padding(TreeViewItemDimensions.rowPadding.rawValue)
                     }
                     
+                }
+                .onTapGesture {
+                    toggle.toggle()
                 }
                 .padding(TreeViewItemDimensions.rowPadding.rawValue)
   
