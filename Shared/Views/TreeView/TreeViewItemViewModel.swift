@@ -13,7 +13,7 @@ class TreeViewItemViewModel: ObservableObject {
     
     let workspaceId: UUID
     @Published var title: String = ""
-    @Published var documents: [Document] = []
+    @Published var documents: [DocumentManagedObject] = []
     
     init(moc: NSManagedObjectContext, workspaceId: UUID) {
         self.moc = moc
@@ -22,8 +22,8 @@ class TreeViewItemViewModel: ObservableObject {
     }
     
     func fetchDocuments(workspaceId: UUID) {
-        let fetchRequest: NSFetchRequest<Document>
-        fetchRequest = Document.fetchRequest()
+        let fetchRequest: NSFetchRequest<DocumentManagedObject>
+        fetchRequest = DocumentManagedObject.fetchRequest()
         
         if let documents = try? moc.fetch(fetchRequest) {
             self.documents = documents.filter({$0.workspace.id == workspaceId}).sorted()
@@ -31,7 +31,7 @@ class TreeViewItemViewModel: ObservableObject {
     }
     
     func deleteWorkspace(workspaceId: UUID) {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Workspace.fetchRequest()
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = WorkspaceManagedObject.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", workspaceId.uuidString)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         do {
@@ -42,7 +42,7 @@ class TreeViewItemViewModel: ObservableObject {
     }
     
     func deleteDocument(workspaceId: UUID, documentId: UUID) {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Document.fetchRequest()
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = DocumentManagedObject.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@ && workspace.id == %@", documentId.uuidString, workspaceId.uuidString)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         do {
@@ -54,13 +54,13 @@ class TreeViewItemViewModel: ObservableObject {
     
     func addDocument(workspaceId: UUID) -> UUID? {
         
-        let fetchRequest: NSFetchRequest<Workspace>
-        fetchRequest = Workspace.fetchRequest()
+        let fetchRequest: NSFetchRequest<WorkspaceManagedObject>
+        fetchRequest = WorkspaceManagedObject.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", workspaceId.uuidString)
         
         if let workspace = try? moc.fetch(fetchRequest).first {
             let now = Date.now
-            let newDocument = Document(context: moc)
+            let newDocument = DocumentManagedObject(context: moc)
             newDocument.id = UUID()
             newDocument.createdAt = now
             newDocument.modifiedAt = now

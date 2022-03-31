@@ -29,7 +29,7 @@ struct TreeViewItem: View, Identifiable {
     let moc: NSManagedObjectContext
     let id: UUID
 
-    let workspace: Binding<Workspace>
+    let workspace: Binding<WorkspaceManagedObject>
     var selected: Binding<DocumentIdentifier>
     let refresh: () -> ()
     
@@ -37,7 +37,7 @@ struct TreeViewItem: View, Identifiable {
     
     init(moc: NSManagedObjectContext,
          id: UUID,
-         workspace: Binding<Workspace>,
+         workspace: Binding<WorkspaceManagedObject>,
          selected: Binding<DocumentIdentifier>,
          refresh: @escaping () -> ()
     ) {
@@ -63,16 +63,9 @@ struct TreeViewItem: View, Identifiable {
                         ArrowView(color: color)
                             .frame(width: TreeViewItemDimensions.arrowWidthHeight.rawValue, height: TreeViewItemDimensions.arrowWidthHeight.rawValue)
                             .rotationEffect(Angle(degrees: 90))
-                            .onTapGesture {
-                                toggle.toggle()
-                            }
-                    
                     } else {
                         ArrowView(color: color)
                             .frame(width: TreeViewItemDimensions.arrowWidthHeight.rawValue, height: TreeViewItemDimensions.arrowWidthHeight.rawValue)
-                            .onTapGesture {
-                                toggle.toggle()
-                            }
                     }
                     
                     
@@ -122,7 +115,9 @@ struct TreeViewItem: View, Identifiable {
                     Text("Delete workspace")
                 }
             }
-            
+            .onTapGesture {
+                toggle.toggle()
+            }
 
             
 

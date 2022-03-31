@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Document" representedClassName=".Document" syncable="YES">
-        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="modifiedAt" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="title" attributeType="String"/>
-        <relationship name="workspace" maxCount="1" deletionRule="Nullify" destinationEntity="Workspace" inverseName="documents" inverseEntity="Workspace"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21D49" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BlockManagedObject" representedClassName=".BlockManagedObject" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="modifiedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="document" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DocumentManagedObject" inverseName="blocks" inverseEntity="DocumentManagedObject"/>
     </entity>
-    <entity name="Workspace" representedClassName=".Workspace" syncable="YES">
+    <entity name="DocumentManagedObject" representedClassName=".DocumentManagedObject" syncable="YES">
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="modifiedAt" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" attributeType="String"/>
-        <relationship name="documents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Document" inverseName="workspace" inverseEntity="Document"/>
+        <relationship name="blocks" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BlockManagedObject" inverseName="document" inverseEntity="BlockManagedObject"/>
+        <relationship name="workspace" maxCount="1" deletionRule="Nullify" destinationEntity="WorkspaceManagedObject" inverseName="documents" inverseEntity="WorkspaceManagedObject"/>
+    </entity>
+    <entity name="WorkspaceManagedObject" representedClassName=".WorkspaceManagedObject" syncable="YES">
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="modifiedAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="documents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DocumentManagedObject" inverseName="workspace" inverseEntity="DocumentManagedObject"/>
     </entity>
     <elements>
-        <element name="Document" positionX="-54" positionY="9" width="128" height="104"/>
-        <element name="Workspace" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="DocumentManagedObject" positionX="-54" positionY="9" width="128" height="119"/>
+        <element name="WorkspaceManagedObject" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="BlockManagedObject" positionX="-63" positionY="45" width="128" height="104"/>
     </elements>
 </model>

@@ -30,8 +30,8 @@ struct GraphnoteApp: App {
     @StateObject private var dataController = DataController.shared
     
     private func fetchInitialDocument() -> (UUID, UUID)? {
-        let fetchRequest: NSFetchRequest<Workspace>
-        fetchRequest = Workspace.fetchRequest()
+        let fetchRequest: NSFetchRequest<WorkspaceManagedObject>
+        fetchRequest = WorkspaceManagedObject.fetchRequest()
         do {
             let workspaces = try dataController.container.viewContext.fetch(fetchRequest)
             
@@ -39,8 +39,8 @@ struct GraphnoteApp: App {
                 return nil
             }
             
-            let docsFetchRequest: NSFetchRequest<Document>
-            docsFetchRequest = Document.fetchRequest()
+            let docsFetchRequest: NSFetchRequest<DocumentManagedObject>
+            docsFetchRequest = DocumentManagedObject.fetchRequest()
 //            docsFetchRequest.predicate = NSPredicate(format: "workspace.id == %@", workspace.id.uuidString)
             
             let documents = try dataController.container.viewContext.fetch(docsFetchRequest)
@@ -95,7 +95,6 @@ struct GraphnoteApp: App {
                         dropDatabase()
                         seed()
                     }
-
                 }
                 
         }
@@ -116,7 +115,7 @@ struct GraphnoteApp: App {
     }
     
     func dropDatabase() {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Workspace.fetchRequest()
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = WorkspaceManagedObject.fetchRequest()
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         try! self.dataController.container.viewContext.execute(deleteRequest)
         
@@ -139,7 +138,7 @@ struct GraphnoteApp: App {
         let moc = self.dataController.container.viewContext
         
         for title in workspaceTitles {
-            let workspace = Workspace(context: moc)
+            let workspace = WorkspaceManagedObject(context: moc)
             let createdAt = Date.now
             workspace.createdAt = createdAt
             workspace.modifiedAt = createdAt
@@ -147,7 +146,7 @@ struct GraphnoteApp: App {
             workspace.title = title
             
             for docTitle in documentTitles {
-                let document = Document(context: moc)
+                let document = DocumentManagedObject(context: moc)
                 document.id = UUID()
                 let createdAt = Date.now
                 document.createdAt = createdAt

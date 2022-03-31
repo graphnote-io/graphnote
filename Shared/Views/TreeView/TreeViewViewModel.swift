@@ -11,8 +11,8 @@ import CoreData
 final class TreeViewViewModel: ObservableObject {
     let moc: NSManagedObjectContext
 
-    @Published var workspaces: [Workspace] = []
-    @Published var documents: [Document] = []
+    @Published var workspaces: [WorkspaceManagedObject] = []
+    @Published var documents: [DocumentManagedObject] = []
     
     init(moc: NSManagedObjectContext) {
         self.moc = moc
@@ -21,8 +21,8 @@ final class TreeViewViewModel: ObservableObject {
     }
     
     func fetchWorkspaces() {
-        let fetchRequest: NSFetchRequest<Workspace>
-        fetchRequest = Workspace.fetchRequest()
+        let fetchRequest: NSFetchRequest<WorkspaceManagedObject>
+        fetchRequest = WorkspaceManagedObject.fetchRequest()
         
         if let workspaces = try? moc.fetch(fetchRequest) {
             self.workspaces = workspaces.sorted()
@@ -30,8 +30,8 @@ final class TreeViewViewModel: ObservableObject {
     }
     
     func fetchDocuments() {
-        let fetchRequest: NSFetchRequest<Document>
-        fetchRequest = Document.fetchRequest()
+        let fetchRequest: NSFetchRequest<DocumentManagedObject>
+        fetchRequest = DocumentManagedObject.fetchRequest()
         
         if let documents = try? moc.fetch(fetchRequest) {
             self.documents = documents
@@ -40,7 +40,7 @@ final class TreeViewViewModel: ObservableObject {
     
     func addWorkspace() {
         let now = Date.now
-        let newWorkspace = Workspace(context: moc)
+        let newWorkspace = WorkspaceManagedObject(context: moc)
         newWorkspace.id = UUID()
         newWorkspace.createdAt = now
         newWorkspace.modifiedAt = now

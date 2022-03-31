@@ -18,16 +18,12 @@ struct ContentView: View {
     @State private var menuOpen = true
     
     @ObservedObject private var viewModel: ContentViewViewModel
-//    @State private var selectedWorkspace: UUID
-//    @State private var selectedDocument: UUID
     @State private var selectedIdentifier: DocumentIdentifier
     
     let moc: NSManagedObjectContext
 
     init(moc: NSManagedObjectContext, initialSelectedDocument: UUID, initalSelectedWorkspace: UUID) {
         self.moc = moc
-//        self._selectedDocument = State(initialValue: initialSelectedDocument)
-//        self._selectedWorkspace = State(initialValue: initalSelectedWorkspace)
         self._selectedIdentifier = State(initialValue: DocumentIdentifier(workspaceId: initalSelectedWorkspace, documentId: initialSelectedDocument))
         self.viewModel = ContentViewViewModel(moc: moc)
         
@@ -61,7 +57,7 @@ struct ContentView: View {
             
         }.task {
 
-            if let workspace = viewModel.items.sorted().first, let document = (workspace.documents?.allObjects as? [Document])?.first  {
+            if let workspace = viewModel.items.sorted().first, let document = (workspace.documents?.allObjects as? [DocumentManagedObject])?.first  {
                 selectedIdentifier = DocumentIdentifier(workspaceId: workspace.id, documentId: document.id)
             }
 

@@ -8,9 +8,9 @@
 import Foundation
 import CoreData
 
-public class Workspace: NSManagedObject {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Workspace> {
-        return NSFetchRequest<Workspace>(entityName: "Workspace")
+public class WorkspaceManagedObject: NSManagedObject {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<WorkspaceManagedObject> {
+        return NSFetchRequest<WorkspaceManagedObject>(entityName: "WorkspaceManagedObject")
     }
     
     @NSManaged public var id: UUID
@@ -20,8 +20,8 @@ public class Workspace: NSManagedObject {
     @NSManaged public var modifiedAt: Date
 }
 
-extension Workspace : Comparable {
-    public static func < (lhs: Workspace, rhs: Workspace) -> Bool {
+extension WorkspaceManagedObject : Comparable {
+    public static func < (lhs: WorkspaceManagedObject, rhs: WorkspaceManagedObject) -> Bool {
         lhs.createdAt < rhs.createdAt
     }
 }
