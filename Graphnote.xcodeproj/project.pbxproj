@@ -219,11 +219,12 @@
 		F86C9F1527B0C7A8002DD87A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F8D92887279FD05B009CC9B9 /* DataController.swift */,
+				F8D92883279FCEB9009CC9B9 /* Graphnote.xcdatamodeld */,
 				F8737FBB27F5611D003A299C /* ManagedObjects */,
 				F8737FBD27F561E4003A299C /* Document.swift */,
 				F8737FC027F561E9003A299C /* Workspace.swift */,
 				F8737FC327F561EE003A299C /* Block.swift */,
+				F8D92887279FD05B009CC9B9 /* DataController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -257,6 +258,9 @@
 		F8737FCB27F56C48003A299C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F8EA4072279CFF54001F74B5 /* ContentView.swift */,
+				F8F32C7F27B9C986003B0DF9 /* ContentViewViewModel.swift */,
+				F8E5A70F27B1EC8D001A5C43 /* LoadingView.swift */,
 				F899DFF1279E2BC700305AFA /* ToolbarView */,
 				F81CC93A279E06D300A1F693 /* DocumentView */,
 				F81CC936279D108400A1F693 /* TreeView */,
@@ -277,10 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				F8EA4071279CFF54001F74B5 /* GraphnoteApp.swift */,
-				F8EA4072279CFF54001F74B5 /* ContentView.swift */,
-				F8F32C7F27B9C986003B0DF9 /* ContentViewViewModel.swift */,
 				F875124827B4A11500E86D57 /* DocumentIdentifier.swift */,
-				F8E5A70F27B1EC8D001A5C43 /* LoadingView.swift */,
 				F899DFF3279E770F00305AFA /* OrientationInfo.swift */,
 				F8D9289027A23CE9009CC9B9 /* Constants.swift */,
 			);
@@ -315,7 +316,6 @@
 				F86C9F1527B0C7A8002DD87A /* Model */,
 				F8737FCB27F56C48003A299C /* Views */,
 				F8EA4073279CFF54001F74B5 /* Assets.xcassets */,
-				F8D92883279FCEB9009CC9B9 /* Graphnote.xcdatamodeld */,
 			);
 			path = Shared;
 			sourceTree = "<group>";

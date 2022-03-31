@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreData
 
 extension BlockView {
     class ViewModel: ObservableObject {

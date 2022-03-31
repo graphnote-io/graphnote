@@ -6,10 +6,8 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct BlockView: View {
-//    let moc: NSManagedObjectContext
     let blockRepo: BlocksRepo
     let id: UUID
     let open: Bool
@@ -20,7 +18,6 @@ struct BlockView: View {
     @ObservedObject private var viewModel: ViewModel
     
     init(blockRepo: BlocksRepo, id: UUID, open: Bool, onSubmit: @escaping () -> ()) {
-//        self.moc = moc
         self.blockRepo = blockRepo
         self.id = id
         self.open = open

@@ -26,7 +26,6 @@ struct ContentView: View {
         self.moc = moc
         self._selectedIdentifier = State(initialValue: DocumentIdentifier(workspaceId: initalSelectedWorkspace, documentId: initialSelectedDocument))
         self.viewModel = ContentViewViewModel(moc: moc)
-        
     }
     
     var body: some View {
@@ -66,7 +65,4 @@ struct ContentView: View {
             viewModel.fetchWorkspaces()
         }
     }
-    
-    
-    
 }
